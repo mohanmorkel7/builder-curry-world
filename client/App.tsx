@@ -17,12 +17,12 @@ const queryClient = new QueryClient();
 // Component to handle redirecting authenticated users from login page
 function LoginPageWrapper() {
   const { user } = useAuth();
-  
+
   // If user is already logged in, redirect to dashboard
   if (user) {
     return <Navigate to="/dashboard" replace />;
   }
-  
+
   return <Index />;
 }
 
@@ -35,13 +35,13 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<LoginPageWrapper />} />
-            <Route 
-              path="/dashboard" 
+            <Route
+              path="/dashboard"
               element={
                 <ProtectedRoute>
                   <Dashboard />
                 </ProtectedRoute>
-              } 
+              }
             />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

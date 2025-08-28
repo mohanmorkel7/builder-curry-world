@@ -1,39 +1,45 @@
-import { useState } from 'react';
-import { useAuth } from '@/contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Loader2, Lock, Mail, Shield } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Loader2, Lock, Mail, Shield } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [showDemo, setShowDemo] = useState(false);
   const { login, isLoading } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
-    
+    setError("");
+
     const success = await login(email, password);
     if (success) {
-      navigate('/dashboard');
+      navigate("/dashboard");
     } else {
-      setError('Invalid email or password. Try the demo credentials below.');
+      setError("Invalid email or password. Try the demo credentials below.");
       setShowDemo(true);
     }
   };
 
   const fillDemoCredentials = () => {
-    setEmail('admin@company.com');
-    setPassword('admin123');
-    setError('');
+    setEmail("admin@company.com");
+    setPassword("admin123");
+    setError("");
   };
 
   return (
@@ -47,9 +53,7 @@ export default function LoginPage() {
           <h1 className="text-3xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
             AdminPro
           </h1>
-          <p className="text-slate-600 mt-2">
-            Secure admin dashboard access
-          </p>
+          <p className="text-slate-600 mt-2">Secure admin dashboard access</p>
         </div>
 
         {/* Login Card */}
@@ -82,7 +86,10 @@ export default function LoginPage() {
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="password" className="text-slate-700 font-medium">
+                <Label
+                  htmlFor="password"
+                  className="text-slate-700 font-medium"
+                >
                   Password
                 </Label>
                 <div className="relative">
@@ -113,7 +120,7 @@ export default function LoginPage() {
                 className={cn(
                   "w-full h-12 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700",
                   "text-white font-semibold rounded-lg shadow-lg transition-all duration-200",
-                  "disabled:opacity-50 disabled:cursor-not-allowed"
+                  "disabled:opacity-50 disabled:cursor-not-allowed",
                 )}
               >
                 {isLoading ? (
@@ -122,7 +129,7 @@ export default function LoginPage() {
                     Signing in...
                   </>
                 ) : (
-                  'Sign in'
+                  "Sign in"
                 )}
               </Button>
             </form>
@@ -135,7 +142,8 @@ export default function LoginPage() {
                 </p>
                 <div className="bg-slate-50 rounded-lg p-3 space-y-1">
                   <p className="text-xs text-slate-600">
-                    <span className="font-medium">Email:</span> admin@company.com
+                    <span className="font-medium">Email:</span>{" "}
+                    admin@company.com
                   </p>
                   <p className="text-xs text-slate-600">
                     <span className="font-medium">Password:</span> admin123
